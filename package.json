@@ -1,0 +1,14 @@
+{
+    "name": "my-awesome-project",
+    "version": "1.0.0",
+    "description": "A description of my awesome project",
+    "scripts": {
+        "start": "ws"
+    },
+    "author": "Khalid Abuhakmeh",
+    "license": "MIT",
+    "dependencies": {},
+    "devDependencies": {
+        "local-web-server": "^5.4.0"
+    }
+}

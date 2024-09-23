@@ -1,0 +1,109 @@
+:root {
+    --color-1900: #FCA204;
+    --color-2700: #FEDE42;
+    --color-3000: #FFF263;
+    --color-3500: #FEFE8D;
+    --color-4000: #F0F0FF;
+    --color-4800: #DDEFFF;
+    --color-5700: #C6E1FF;
+    --color-6000: #BDD9FF;
+    --color-7000: #A2CFFF;
+    --color-default: var(--color-4000);
+}
+
+#title-bar {
+    padding: 10px;
+    text-align: left;
+    font-size: 2em;
+    font-family: Arial, sans-serif;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-bottom: #333;
+    color: black;
+    vertical-align: center;
+    display: flex;
+    align-items: center;
+    .logo {
+        width: 50px;
+        height: 50px;
+    }
+}
+
+body {
+    /* default color */
+    background-color: var(--color-default);
+    margin: 0
+}
+
+#display {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    font-size: 4em;
+    color: #000;
+    font-family: Helvetica, Arial, serif;
+    text-transform: uppercase;
+}
+
+
+#presets {
+    position: absolute;
+    bottom: 2em;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 0;
+    margin: 0 auto;
+    input[type="color"] {
+        border: none;
+        width: 100px;
+        height: 100px;
+        padding: 0;
+        margin: 0;
+    }
+    button {
+        width: 100px;
+        height: 100px;
+        list-style-type: none;
+        cursor: pointer;
+        border: 0;
+        &:hover {
+            transform: scale(1.1);
+            transition: transform 0.3s;
+        }
+    }
+    button[data-temperature="1900"] {
+        background-color: var(--color-1900);
+    }
+    button[data-temperature="2700"] {
+        background-color: var(--color-2700);
+    }
+    button[data-temperature="3000"] {
+        background-color: var(--color-3000);
+    }
+    button[data-temperature="3500"] {
+        background-color: var(--color-3500);
+    }
+    button[data-temperature="4000"] {
+        background-color: var(--color-4000);
+    }
+    button[data-temperature="4800"] {
+        background-color: var(--color-4800);
+    }
+    button[data-temperature="5700"] {
+        background-color: var(--color-5700);
+    }
+    button[data-temperature="6000"] {
+        background-color: var(--color-6000);
+    }
+    button[data-temperature="7000"] {
+        background-color: var(--color-7000);
+    }
+
+    button[aria-selected="true"] {
+        box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.3);
+        outline: 2px solid #333;
+        transform: scale(1.1);
+    }
+}

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Kelvin - The Keylight Web App</title>
+        <link rel="stylesheet" href="/css/style.css">
+        <meta name="author" content="Khalid Abuhakmeh">
+        <meta name="description" content="Keylight web app">
+        <link href="https://khalidabuhakmeh.com" rel="author">
+    </head>
+    <body>
+        <nav id="title-bar">
+            <img class="logo" width="40px" src="/logo.svg" title="Kelvin logo" alt="A thermometer"/>
+            KELVIN
+        </nav>
+        <div id="display"></div>
+        <div id="presets">
+            <button data-temperature="1900" title="Candle"></button>
+            <button data-temperature="2700" title="Light Bulb (2700K)"></button>
+            <button data-temperature="3000" title="Light Bulb (3000K)"></button>
+            <button data-temperature="3500" title="Light Bulb (3500K)"></button>
+            <button data-temperature="4000" title="Light Bulb (4000K)" aria-selected="true"></button>
+            <button data-temperature="4800" title="Direct Sunlight (4800K)"></button>
+            <button data-temperature="5700" title="Light Bulb (5700K)"></button>
+            <button data-temperature="6000" title="Cloudy Sky (6000K)"></button>
+            <button data-temperature="7000" title="Light Bulb (7000K)"></button>
+            <input type="color" id="colorPicker" title="Pick a custom color">
+        </div>
+        <script src="/js/site.js" type="application/javascript"></script>
+    </body>
+</html>
