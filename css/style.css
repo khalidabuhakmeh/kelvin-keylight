@@ -28,6 +28,31 @@
     }
 }
 
+menu {
+    margin: 0 0 0 auto;
+    li {
+        display: inline;
+        list-style-type: none;
+        font-size: .4em;
+        a {
+            text-decoration: none;
+            padding: 5px;
+            border-radius: 3px;
+            background-color: black;
+            color: white;
+            font-weight: bold;
+            img {
+                vertical-align: sub;
+            }
+            &:hover {
+                background-color: red;
+            }
+        }
+    }
+
+}
+
+
 body {
     /* default color */
     background-color: var(--color-default);
@@ -107,3 +132,4 @@ body {
         transform: scale(1.1);
     }
 }
+
