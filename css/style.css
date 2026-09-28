@@ -9,6 +9,50 @@
     --color-6000: #BDD9FF;
     --color-7000: #A2CFFF;
     --color-default: var(--color-4000);
+
+    /* Adaptive text colors, driven by body.on-dark / body.on-light */
+    --text-color: #111;
+    --panel-bg: rgba(255, 255, 255, 0.35);
+    --panel-border: rgba(0, 0, 0, 0.15);
+    --ring-color: rgba(0, 0, 0, 0.6);
+    --accent-color: #333;
+}
+
+body.on-dark {
+    --text-color: #f5f5f5;
+    --panel-bg: rgba(0, 0, 0, 0.35);
+    --panel-border: rgba(255, 255, 255, 0.25);
+    --ring-color: rgba(255, 255, 255, 0.85);
+    --accent-color: #f5f5f5;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+/* Accessible visually-hidden utility (keeps content available to search engines & screen readers) */
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    border: 0;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    white-space: nowrap;
+}
+
+body {
+    /* default color */
+    background-color: var(--color-default);
+    margin: 0;
+    min-height: 100svh;
+    min-height: 100dvh;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    transition: background-color 0.35s ease;
 }
 
 #title-bar {
@@ -17,14 +61,17 @@
     font-size: 2em;
     font-family: Arial, sans-serif;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-bottom: #333;
-    color: black;
-    vertical-align: center;
+    border-bottom: 1px solid var(--panel-border);
+    color: var(--text-color);
     display: flex;
     align-items: center;
+    transition: opacity 0.4s ease, color 0.35s ease;
+
     .logo {
         width: 50px;
         height: 50px;
+        color: var(--text-color);
+        transition: color 0.35s ease, fill 0.35s ease;
     }
 }
 
@@ -41,95 +88,236 @@ menu {
             background-color: black;
             color: white;
             font-weight: bold;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            .menu-icon {
+                width: 1em;
+                height: 1em;
+                flex-shrink: 0;
+            }
             img {
                 vertical-align: sub;
             }
             &:hover {
                 background-color: red;
             }
+            &:focus-visible {
+                outline: 3px solid var(--ring-color);
+                outline-offset: 2px;
+            }
         }
     }
-
-}
-
-
-body {
-    /* default color */
-    background-color: var(--color-default);
-    margin: 0
 }
 
 #display {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    align-self: center;
+    justify-self: center;
     text-align: center;
-    font-size: 4em;
-    color: #000;
-    font-family: Helvetica, Arial, serif;
+    font-size: clamp(2rem, 8vw, 5rem);
+    color: var(--text-color);
+    font-family: Helvetica, Arial, sans-serif;
     text-transform: uppercase;
+    padding: 0 1rem;
+    transition: color 0.35s ease;
+    pointer-events: none;
 }
 
+/* Full-screen black overlay for dimming; opacity set in JS = (1 - brightness) */
+#dimmer {
+    position: fixed;
+    inset: 0;
+    background: #000;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 5;
+    transition: opacity 0.2s ease;
+}
 
 #presets {
-    position: absolute;
-    bottom: 2em;
-    width: 100%;
+    position: fixed;
+    bottom: clamp(0.75rem, 2vh, 2rem);
+    left: 50%;
+    transform: translateX(-50%);
     display: flex;
+    align-items: center;
     justify-content: center;
-    padding: 0;
-    margin: 0 auto;
-    input[type="color"] {
-        border: none;
-        width: 100px;
-        height: 100px;
-        padding: 0;
-        margin: 0;
+    flex-wrap: wrap;
+    gap: clamp(0.35rem, 1vw, 0.75rem);
+    padding: clamp(0.4rem, 1vw, 0.75rem);
+    margin: 0;
+    z-index: 10;
+
+    /* Refined pill container with backdrop blur */
+    background: var(--panel-bg);
+    border: 1px solid var(--panel-border);
+    border-radius: 999px;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.15);
+    transition: opacity 0.4s ease;
+
+    /* Coloris field, styled as a circular swatch to match the presets */
+    .clr-field {
+        display: inline-block;
+        position: relative;
+        width: clamp(44px, 8vw, 72px);
+        height: clamp(44px, 8vw, 72px);
+        border-radius: 50%;
+        transition: transform 0.25s ease, box-shadow 0.25s ease;
+        box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.08);
+
+        input {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            border: 0;
+            border-radius: 50%;
+            background: none;
+            color: transparent;
+            cursor: pointer;
+            opacity: 0; /* transparent hit area over the swatch, still focusable */
+        }
+
+        /* Coloris' swatch button fills the whole circle */
+        button {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            transform: none;
+            border-radius: 50%;
+            overflow: hidden;
+        }
+
+        input:focus-visible ~ button {
+            outline: 3px solid var(--ring-color);
+            outline-offset: 3px;
+        }
+
+        &:has(#colorPicker[aria-selected="true"]) {
+            box-shadow: 0 0 0 3px var(--ring-color), 0 0 12px 2px rgba(0, 0, 0, 0.25);
+            transform: scale(1.12);
+        }
     }
-    button {
-        width: 100px;
-        height: 100px;
+
+    button[data-temperature] {
+        width: clamp(44px, 8vw, 72px);
+        height: clamp(44px, 8vw, 72px);
+        min-width: 44px;
+        min-height: 44px;
         list-style-type: none;
         cursor: pointer;
         border: 0;
+        border-radius: 50%;
+        /* subtle warm->cool gradient hint over the base color */
+        background-image: linear-gradient(135deg,
+            rgba(255, 180, 60, 0.18),
+            rgba(255, 255, 255, 0) 45%,
+            rgba(120, 190, 255, 0.18));
+        box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.08);
+        transition: transform 0.25s ease, box-shadow 0.25s ease;
         &:hover {
             transform: scale(1.1);
-            transition: transform 0.3s;
+        }
+        &:focus-visible {
+            outline: 3px solid var(--ring-color);
+            outline-offset: 3px;
         }
     }
-    button[data-temperature="1900"] {
-        background-color: var(--color-1900);
-    }
-    button[data-temperature="2700"] {
-        background-color: var(--color-2700);
-    }
-    button[data-temperature="3000"] {
-        background-color: var(--color-3000);
-    }
-    button[data-temperature="3500"] {
-        background-color: var(--color-3500);
-    }
-    button[data-temperature="4000"] {
-        background-color: var(--color-4000);
-    }
-    button[data-temperature="4800"] {
-        background-color: var(--color-4800);
-    }
-    button[data-temperature="5700"] {
-        background-color: var(--color-5700);
-    }
-    button[data-temperature="6000"] {
-        background-color: var(--color-6000);
-    }
-    button[data-temperature="7000"] {
-        background-color: var(--color-7000);
-    }
+
+    button[data-temperature="1900"] { background-color: var(--color-1900); }
+    button[data-temperature="2700"] { background-color: var(--color-2700); }
+    button[data-temperature="3000"] { background-color: var(--color-3000); }
+    button[data-temperature="3500"] { background-color: var(--color-3500); }
+    button[data-temperature="4000"] { background-color: var(--color-4000); }
+    button[data-temperature="4800"] { background-color: var(--color-4800); }
+    button[data-temperature="5700"] { background-color: var(--color-5700); }
+    button[data-temperature="6000"] { background-color: var(--color-6000); }
+    button[data-temperature="7000"] { background-color: var(--color-7000); }
 
     button[aria-selected="true"] {
-        box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.3);
-        outline: 2px solid #333;
-        transform: scale(1.1);
+        box-shadow: 0 0 0 3px var(--ring-color), 0 0 12px 2px rgba(0, 0, 0, 0.25);
+        transform: scale(1.12);
     }
 }
 
+/* Brightness control */
+#brightness-control {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0 0.5rem;
+    min-height: 44px;
+
+    .control-icon {
+        font-size: 1.1rem;
+        line-height: 1;
+        color: var(--text-color);
+        display: inline-flex;
+        transition: color 0.35s ease;
+        svg {
+            width: 1.2rem;
+            height: 1.2rem;
+        }
+    }
+
+    input[type="range"] {
+        width: clamp(80px, 14vw, 140px);
+        accent-color: var(--accent-color);
+        cursor: pointer;
+        transition: accent-color 0.35s ease;
+        &:focus-visible {
+            outline: 3px solid var(--ring-color);
+            outline-offset: 3px;
+        }
+    }
+}
+
+/* Fullscreen button */
+#fullscreenBtn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 44px;
+    min-height: 44px;
+    width: clamp(44px, 8vw, 56px);
+    height: clamp(44px, 8vw, 56px);
+    border: 1px solid var(--panel-border);
+    border-radius: 50%;
+    background: var(--panel-bg);
+    color: var(--text-color);
+    font-size: 1.3rem;
+    cursor: pointer;
+    transition: transform 0.25s ease, background 0.25s ease, color 0.35s ease;
+    svg {
+        width: 1.4rem;
+        height: 1.4rem;
+    }
+    &:hover {
+        transform: scale(1.08);
+    }
+    &:focus-visible {
+        outline: 3px solid var(--ring-color);
+        outline-offset: 3px;
+    }
+}
+
+/* Auto-hide controls after inactivity */
+body.controls-hidden #title-bar,
+body.controls-hidden #presets {
+    opacity: 0;
+    pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        transition: none !important;
+    }
+    #presets button:hover,
+    #presets button[aria-selected="true"],
+    #fullscreenBtn:hover {
+        transform: none;
+    }
+}

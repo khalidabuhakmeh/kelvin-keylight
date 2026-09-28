@@ -1,12 +1,15 @@
 {
-    "name": "my-awesome-project",
+    "name": "kelvin-keylight",
     "version": "1.0.0",
-    "description": "A description of my awesome project",
+    "description": "A browser-based keylight web app that turns your display into a soft, color-temperature light for video calls.",
     "scripts": {
         "start": "ws"
     },
     "author": "Khalid Abuhakmeh",
     "license": "MIT",
+    "engines": {
+        "node": ">=24"
+    },
     "dependencies": {},
     "devDependencies": {
         "local-web-server": "^5.4.0"

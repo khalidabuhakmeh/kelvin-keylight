@@ -21,3 +21,6 @@ build/
 
 # dotenv environment variables file
 .env
+
+# JetBrains IDE
+.idea/

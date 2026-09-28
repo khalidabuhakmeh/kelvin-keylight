@@ -3,26 +3,85 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Kelvin - The Keylight Web App</title>
+        <title>Kelvin — Free Keylight Web App | Turn Your Screen Into a Video Call Light</title>
+        <link rel="canonical" href="https://kelvin-keylight.netlify.app/">
         <link rel="stylesheet" href="/css/style.css">
+        <link rel="stylesheet" href="/vendor/coloris/coloris.min.css">
+
+        <!-- Primary SEO metadata -->
+        <meta name="description" content="Kelvin is a free, browser-based keylight app that turns your monitor into an adjustable color-temperature light for video calls, streaming, and meetings — no hardware needed.">
+        <meta name="keywords" content="keylight, key light, webcam lighting, video call lighting, screen light, monitor light, color temperature, kelvin, free keylight app, zoom lighting, streaming light">
         <meta name="author" content="Khalid Abuhakmeh">
-        <meta name="description" content="Keylight web app">
+        <meta name="robots" content="index, follow">
+        <meta name="theme-color" content="#F0F0FF">
         <link href="https://khalidabuhakmeh.com" rel="author">
+
+        <!-- Open Graph / Facebook -->
+        <meta property="og:type" content="website">
+        <meta property="og:site_name" content="Kelvin">
+        <meta property="og:url" content="https://kelvin-keylight.netlify.app/">
+        <meta property="og:title" content="Kelvin — Free Keylight Web App">
+        <meta property="og:description" content="Turn your monitor into an adjustable color-temperature keylight for video calls and streaming. Free, browser-based, no hardware needed.">
+        <meta property="og:image" content="https://kelvin-keylight.netlify.app/misc/screenshot.png">
+        <meta property="og:image:alt" content="The Kelvin keylight web app filling a screen with warm light">
+
+        <!-- Twitter Card -->
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:title" content="Kelvin — Free Keylight Web App">
+        <meta name="twitter:description" content="Turn your monitor into an adjustable color-temperature keylight for video calls and streaming. Free and browser-based.">
+        <meta name="twitter:image" content="https://kelvin-keylight.netlify.app/misc/screenshot.png">
+
+        <!-- Icons & manifest -->
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
         <link rel="manifest" href="/site.webmanifest">
+
+        <!-- Structured data -->
+        <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "WebApplication",
+            "name": "Kelvin",
+            "url": "https://kelvin-keylight.netlify.app/",
+            "description": "A free, browser-based keylight app that turns your monitor into an adjustable color-temperature light for video calls, streaming, and meetings.",
+            "applicationCategory": "UtilitiesApplication",
+            "operatingSystem": "Any (web browser)",
+            "browserRequirements": "Requires a modern web browser",
+            "offers": {
+                "@type": "Offer",
+                "price": "0",
+                "priceCurrency": "USD"
+            },
+            "author": {
+                "@type": "Person",
+                "name": "Khalid Abuhakmeh",
+                "url": "https://khalidabuhakmeh.com"
+            }
+        }
+        </script>
     </head>
     <body>
+        <h1 class="visually-hidden">Kelvin — Free Keylight Web App for Video Calls and Streaming</h1>
         <nav id="title-bar">
-            <img class="logo" width="40px" src="/logo.svg" title="Kelvin logo" alt="A thermometer"/>
+            <svg class="logo" width="40" height="40" viewBox="0 0 100 100" role="img"
+                 aria-label="Kelvin logo" xmlns="http://www.w3.org/2000/svg">
+                <title>A thermometer</title>
+                <path d="m37.672 86.641c-4.1445-0.003906-8.1172-1.6602-11.031-4.6055-2.9141-2.9453-4.5312-6.9336-4.4883-11.078 0.039062-4.1445 1.7344-8.1016 4.707-10.988v-35.797c0-5.9727 4.8398-10.812 10.812-10.812s10.812 4.8398 10.812 10.812v35.797c2.9727 2.8867 4.668 6.8438 4.707 10.988 0.042969 4.1445-1.5742 8.1328-4.4883 11.078-2.9141 2.9453-6.8867 4.6016-11.031 4.6055zm0-67.031c-2.5195 0-4.5625 2.043-4.5625 4.5625v38.719l-1.1875 0.9375c-3.1016 2.4492-4.3125 6.5938-3.0195 10.328 1.2969 3.7344 4.8164 6.2383 8.7695 6.2383s7.4727-2.5039 8.7695-6.2383c1.293-3.7344 0.082032-7.8789-3.0195-10.328l-1.1875-0.9375v-38.719c0-2.5195-2.043-4.5625-4.5625-4.5625zm40.188 2.7188h-20.312v6.25h20.312zm0 17.547h-20.312v6.25h20.312zm0 17.547h-17.188v6.25h17.188z"
+                      fill="currentColor"/>
+            </svg>
             KELVIN
             <menu>
-                <li><a href="https://khalidabuhakmeh.com">⚡️ Khalid</a></li>
+                <li><a href="https://khalidabuhakmeh.com">
+                    <svg class="menu-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                        <path d="M13 2 3 14h7l-1 8 10-12h-7l1-8z"/>
+                    </svg>
+                    Khalid</a></li>
                 <li><a href="https://github.com/khalidabuhakmeh/kelvin-keylight">
-                    <img src="/github.svg" alt="github logo" width="15">
-                    GitHub
-                </a></li>
+                    <svg class="menu-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M12 1.25a10.75 10.75 0 0 0-3.4 20.95c.54.1.73-.23.73-.52l-.01-1.83c-2.99.65-3.62-1.44-3.62-1.44-.49-1.24-1.19-1.57-1.19-1.57-.98-.67.07-.65.07-.65 1.08.07 1.65 1.11 1.65 1.11.96 1.65 2.52 1.17 3.13.9.1-.7.38-1.17.68-1.44-2.39-.27-4.9-1.2-4.9-5.3 0-1.17.42-2.13 1.1-2.88-.1-.27-.48-1.36.11-2.84 0 0 .9-.29 2.96 1.1a10.3 10.3 0 0 1 5.4 0c2.05-1.39 2.95-1.1 2.95-1.1.59 1.48.22 2.57.11 2.84.69.75 1.1 1.71 1.1 2.88 0 4.11-2.51 5.02-4.9 5.29.39.33.73.98.73 1.98l-.01 2.93c0 .29.19.63.74.52A10.75 10.75 0 0 0 12 1.25z"/>
+                    </svg>
+                    GitHub</a></li>
             </menu>
 
         </nav>
@@ -37,8 +96,29 @@
             <button data-temperature="5700" title="Light Bulb (5700K)"></button>
             <button data-temperature="6000" title="Cloudy Sky (6000K)"></button>
             <button data-temperature="7000" title="Light Bulb (7000K)"></button>
-            <input type="color" id="colorPicker" title="Pick a custom color">
+            <input type="text" id="colorPicker" class="coloris" data-coloris
+                   value="#F0F0FF" title="Pick a custom color" aria-label="Pick a custom light color">
+            <label id="brightness-control">
+                <span class="control-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                         stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="4"/>
+                        <path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32 1.41 1.41M2 12h2m16 0h2M4.93 19.07l1.41-1.41m11.32-11.32 1.41-1.41"/>
+                    </svg>
+                </span>
+                <input type="range" id="brightness" min="0.15" max="1" step="0.01" value="1"
+                       aria-label="Brightness / dimming">
+            </label>
+            <button type="button" id="fullscreenBtn" title="Toggle fullscreen (F)"
+                    aria-label="Toggle fullscreen">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                     stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3M3 16v3a2 2 0 0 0 2 2h3m8 0h3a2 2 0 0 0 2-2v-3"/>
+                </svg>
+            </button>
         </div>
+        <div id="dimmer" aria-hidden="true"></div>
+        <script src="/vendor/coloris/coloris.min.js"></script>
         <script src="/js/site.js" type="application/javascript"></script>
     </body>
 </html>
